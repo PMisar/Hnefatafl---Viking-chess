@@ -32,14 +32,14 @@ body {
 #game-end {
   position: absolute;
   text-align: center;
-  background-image: url('/images/otherimage.jpg');
-  background-size: cover; /* This ensures the image covers the entire area */
-  background-position: center center; /* This centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-image: url("/images/otherimage.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   color: #fff;
   font-size: 1.5rem;
-  width: 100%; /* Ensure the intro takes up the full width */
-  height: 100%; 
+  width: 100%;
+  height: 100%;
 }
 
 #rules-modal {
@@ -71,20 +71,28 @@ body {
   margin-top: 0;
 }
 
-#rules-content button {
-  margin-top: 20px;
+.medieval-button {
   padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #b85d4a;
-  color: white;
+  background-color: #795649;
+  color: #f4e5c3;
+  border: 2px solid #c0a080;
+  font-family: "Goudy Bookletter 1911", serif;
+  font-size: 18px;
+  text-shadow: 1px 1px 0px #a67c52;
+  box-shadow: 2px 2px 0px #a67c52;
+  border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
-#rules-content button:hover {
-  background-color: #a84938;
+.medieval-button:hover {
+  background-color: #8a6e2f;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+.medieval-button:active {
+  box-shadow: inset 1px 1px 2px 0px rgba(0, 0, 0, 0.5);
+  transform: translateY(2px);
 }
 
 #game-end {
