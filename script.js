@@ -1,4 +1,35 @@
 // script.js
+// window.onload = function () {
+//   const startButton = document.getElementById("start-button");
+//   const backToTheMenuButton = document.getElementById("back-to-the-menu");
+//   const gameScreen = document.getElementById("game-screen");
+//   const startWindow = document.getElementById("game-intro");
+//   const endGameWindow = document.getElementById("game-end");
+//   const rulesButton = document.getElementById("rules-button");
+//   const rulesModal = document.getElementById("rules-modal");
+//   const closeRulesButton = document.getElementById("close-rules-button");
+
+//   startButton.addEventListener("click", function () {
+//     startGame();
+//   });
+
+//   function startGame() {
+//     startWindow.classList.add("hidden");
+//     gameScreen.classList.remove("hidden");
+//     initializeGame();
+//     renderBoard();
+//     updateTurnIndicator();
+//   }
+
+//   rulesButton.addEventListener("click", () => {
+//     rulesModal.classList.remove("hidden");
+//   });
+
+//   closeRulesButton.addEventListener("click", () => {
+//     rulesModal.classList.add("hidden");
+//   });
+
+// script.js
 window.onload = function () {
   const startButton = document.getElementById("start-button");
   const backToTheMenuButton = document.getElementById("back-to-the-menu");
@@ -8,6 +39,14 @@ window.onload = function () {
   const rulesButton = document.getElementById("rules-button");
   const rulesModal = document.getElementById("rules-modal");
   const closeRulesButton = document.getElementById("close-rules-button");
+  const muteButton = document.getElementById("mute-button");
+
+  // const introSound = document.getElementById("intro-sound");
+  const backgroundSound = document.getElementById("background-sound");
+  const moveASound = document.getElementById("moveA-sound");
+  const moveDKSound = document.getElementById("moveDK-sound");
+
+  let isMuted = false;
 
   startButton.addEventListener("click", function () {
     startGame();
@@ -16,6 +55,8 @@ window.onload = function () {
   function startGame() {
     startWindow.classList.add("hidden");
     gameScreen.classList.remove("hidden");
+    // introSound.play();
+    backgroundSound.play(); // Play background sound after user interaction
     initializeGame();
     renderBoard();
     updateTurnIndicator();
@@ -29,6 +70,24 @@ window.onload = function () {
     rulesModal.classList.add("hidden");
   });
 
+  muteButton.addEventListener("click", () => {
+    isMuted = !isMuted;
+    if (isMuted) {
+      // introSound.muted = true;
+      backgroundSound.muted = true;
+      moveASound.muted = true;
+      moveDKSound.muted = true;
+      muteButton.textContent = "Unmute";
+    } else {
+      // introSound.muted = false;
+      backgroundSound.muted = false;
+      moveASound.muted = false;
+      moveDKSound.muted = false;
+      muteButton.textContent = "Mute";
+    }
+  });
+
+  
   const boardSize = 11;
   const board = Array(boardSize).fill(null).map(() => Array(boardSize).fill(null));
 
@@ -106,6 +165,27 @@ window.onload = function () {
     }
   });
 
+  // function movePiece(fromRow, fromCol, toRow, toCol) {
+  //   const piece = board[fromRow][fromCol];
+
+  //   if (!isValidTurn(piece)) {
+  //     return;
+  //   }
+
+  //   if (isValidMove(fromRow, fromCol, toRow, toCol)) {
+  //     board[toRow][toCol] = piece;
+  //     board[fromRow][fromCol] = null;
+  //     renderBoard();
+
+  //     capturePieces(toRow, toCol);
+  //     renderBoard();
+
+  //     if (!checkEndGame()) {
+  //       switchTurn();
+  //     }
+  //   }
+  // }
+
   function movePiece(fromRow, fromCol, toRow, toCol) {
     const piece = board[fromRow][fromCol];
 
@@ -121,11 +201,19 @@ window.onload = function () {
       capturePieces(toRow, toCol);
       renderBoard();
 
+      // Play move sound based on the piece type
+      if (piece === 'A') {
+        moveASound.play();
+      } else if (piece === 'D' || piece === 'K') {
+        moveDKSound.play();
+      }
+
       if (!checkEndGame()) {
         switchTurn();
       }
     }
   }
+
 
   function isValidTurn(piece) {
     if (currentPlayer === 'A') {
