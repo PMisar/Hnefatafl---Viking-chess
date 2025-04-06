@@ -38,51 +38,51 @@ body {
   right: 20px;
   z-index: 10;
   background: transparent;
-  border: none;     
-  padding: 0; 
+  border: none;
+  padding: 0;
 }
 
 .speaker {
-	height: 30px;
-	width: 30px;
-	position: relative;
-	overflow: hidden;
-	display: inline-block;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
 
-	span {
-		display: block;
-		width: 8px;
-		height: 8px;
-		background: transparent;
-		margin: 11px 0 0 2px;
+  span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: transparent;
+    margin: 11px 0 0 2px;
 
-		&:after {
-			content: '';
-			position: absolute;
-			width: 0;
-			height: 0;
-			border-style: solid;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
       border-color: transparent #000 transparent transparent;
-			border-width: 10px 14px 10px 15px;
-			left: -13px;
-			top: 5px;
-		}
+      border-width: 10px 14px 10px 15px;
+      left: -13px;
+      top: 5px;
+    }
 
-		&:before {
-			transform: rotate(45deg);
-			border-radius: 0 50px 0 0;
-			content: '';
-			position: absolute;
-			width: 5px;
-			height: 5px;
-			border-style: double;
+    &:before {
+      transform: rotate(45deg);
+      border-radius: 0 50px 0 0;
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-style: double;
       border-color: #000;
-			border-width: 7px 7px 0 0;
-			left: 18px;
-			top: 9px;
-			transition: all 0.2s ease-out;
-		}
-	}
+      border-width: 7px 7px 0 0;
+      left: 18px;
+      top: 9px;
+      transition: all 0.2s ease-out;
+    }
+  }
 
   .speaker::after {
     content: attr(data-label);
@@ -93,16 +93,15 @@ body {
     font-size: 14px;
   }
 
-	&:hover {
-
-		span:before {
-			transform: scale(.8) translate(-3px, 0) rotate(42deg);		
+  &:hover {
+    span:before {
+      transform: scale(0.8) translate(-3px, 0) rotate(42deg);
     }
-	}
-  
+  }
+
   &.mute {
     span:before {
-			transform: scale(.5) translate(-15px, 0) rotate(36deg);
+      transform: scale(0.5) translate(-15px, 0) rotate(36deg);
       opacity: 0;
     }
   }
@@ -113,7 +112,6 @@ body {
   grid-template-columns: repeat(11, 1fr);
   grid-template-rows: repeat(11, 1fr);
   gap: 1.5px;
-  /* border-radius: 15px; */
   width: calc(100% - 70px);
   height: calc(100% - 70px);
 }
@@ -121,35 +119,27 @@ body {
 #game-intro,
 #game-end {
   position: absolute;
-  display: flex;
   background-image: url("/images/intro\ img.png");
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(36, 35, 35);
   background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  font-size: 1.5rem;
   width: 100%;
   height: 100%;
 }
 
 #game-intro button {
-  margin: 0 15px; /* Space between buttons */
+  margin: 0 15px;
 }
 
 #game-intro .button-container {
   display: flex;
-  justify-content: space-evenly; /* Evenly space the buttons */
-  width: 100%; /* Full width */
-  padding: 10px 0; /* Add some padding to the container */
+  justify-content: space-evenly;
+  width: 100%; 
+  padding: 10px 0;
   position: absolute;
-  bottom: 20px; /* Position it near the bottom */
+  bottom: 20px; 
 }
 
 #game-intro .button-container .medieval-button {
-  width: 150px; /* You can adjust the button width if needed */
+  width: 150px; 
   padding: 15px;
 }
 
@@ -165,31 +155,24 @@ body {
 
 #rules-modal {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
 }
 
 #rules-content {
-  background-color: #b09d9d;
+  background-color: rgba(0, 0, 0, 0.7);
   width: 80%;
   height: 80%;
   padding: 20px;
+  color: white;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   overflow-y: auto;
   font-family: "MedievalSharp", Arial, sans-serif;
   text-align: center;
-}
-
-#rules-content h2 {
-  margin-top: 0;
 }
 
 #game-end {
@@ -215,7 +198,6 @@ body {
 
 .cell[data-piece="A"] {
   background-color: #b85d4a;
-  /* color: transparent; */
   border: 3px solid #b84532;
   background-image: url("/images/attackers.png");
   background-size: 110%;
@@ -255,15 +237,6 @@ body {
   background-color: rgba(0, 100, 0, 0.3);
 }
 
-.cell[data-row="0"][data-col="0"].valid-move,
-.cell[data-row="0"][data-col="10"].valid-move,
-.cell[data-row="10"][data-col="0"].valid-move,
-.cell[data-row="10"][data-col="10"].valid-move,
-.cell[data-row="5"][data-col="5"].valid-move {
-  border: 2px solid #7b5841;
-  background-color: #1e2a36;
-}
-
 .cell[data-piece] {
   cursor: pointer;
 }
@@ -276,15 +249,12 @@ body {
   background-color: #1e2a36;
   border: 2px solid #7b5841;
   z-index: 2;
-  background-size: 80%;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-
 .medieval-button {
-  font-family: 'MedievalSharp', cursive;
+  font-family: "MedievalSharp", cursive;
   font-size: 20px;
   color: #f8e7b8;
   background: linear-gradient(145deg, #4b2e1e, #2e1a10);
@@ -294,19 +264,19 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   position: relative;
-  box-shadow:
-    0 0 10px rgba(212, 175, 55, 0.2),
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.2),
     inset 0 0 8px rgba(212, 175, 55, 0.1);
   transition: all 0.3s ease;
   cursor: pointer;
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 20px;
     height: 20px;
-    background: url('https://www.transparenttextures.com/patterns/ornaments.png') no-repeat center;
+    background: url("https://www.transparenttextures.com/patterns/ornaments.png")
+      no-repeat center;
     background-size: contain;
     opacity: 0.3;
   }
@@ -325,9 +295,7 @@ body {
     color: #fff4d0;
     background: linear-gradient(145deg, #5b3c26, #372010);
     border-color: #ffdc73;
-    box-shadow:
-      0 0 18px #d4af37,
-      inset 0 0 6px #8c6c3d;
+    box-shadow: 0 0 18px #d4af37, inset 0 0 6px #8c6c3d;
     transform: scale(1.03);
   }
 

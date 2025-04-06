@@ -11,6 +11,8 @@ window.onload = function () {
   const backgroundSound = document.getElementById("background-sound");
   const moveASound = document.getElementById("moveA-sound");
   const moveDKSound = document.getElementById("moveDK-sound");
+  const restartButton = document.getElementById("restart-button");
+
 
   let isBgMuted = false;
   let isMoveMuted = false;
@@ -35,16 +37,6 @@ window.onload = function () {
   closeRulesButton.addEventListener("click", () => {
     rulesModal.classList.add("hidden");
   });
-
-  // muteBgButton.addEventListener("click", () => {
-  //   const isMuted = !backgroundSound.muted;
-
-  //   backgroundSound.muted = isMuted;
-  //   moveASound.muted = isMuted;
-  //   moveDKSound.muted = isMuted;
-
-  //   muteBgButton.textContent = isMuted ? "Unmute Sound" : "Mute Sound";
-  // });
 
   muteBgButton.addEventListener("click", () => {
     const isMuted = !backgroundSound.muted;
@@ -173,8 +165,6 @@ window.onload = function () {
   }
 
   function updateTurnIndicator() {
-    // Note: The original code references a non-existent turn-indicator element
-    // You might want to add this to your HTML if you want to display the turn
     const turnIndicator = document.getElementById('turn-indicator');
     if (turnIndicator) {
       turnIndicator.textContent = `Current Turn: ${currentPlayer}`;
@@ -339,12 +329,4 @@ window.onload = function () {
     gameScreen.classList.add('hidden');
     endGameWindow.classList.remove('hidden');
   }
-
-  function restartGame() {
-    location.reload();
-  }
-
-  backToTheMenuButton.addEventListener("click", function () {
-    restartGame();
-  });
 };
