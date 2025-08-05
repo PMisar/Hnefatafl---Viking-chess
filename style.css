@@ -34,8 +34,8 @@ body {
 
 #mute-bg-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  bottom: 10px;
+  right: 10px;
   z-index: 10;
   background: transparent;
   border: none;
@@ -51,8 +51,8 @@ body {
 
   span {
     display: block;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     background: transparent;
     margin: 11px 0 0 2px;
 
@@ -62,7 +62,7 @@ body {
       width: 0;
       height: 0;
       border-style: solid;
-      border-color: transparent #000 transparent transparent;
+      border-color: transparent #1e2a36 transparent transparent;
       border-width: 10px 14px 10px 15px;
       left: -13px;
       top: 5px;
@@ -76,7 +76,7 @@ body {
       width: 5px;
       height: 5px;
       border-style: double;
-      border-color: #000;
+      border-color: #1e2a36;
       border-width: 7px 7px 0 0;
       left: 18px;
       top: 9px;
@@ -141,6 +141,48 @@ body {
 #game-intro .button-container .medieval-button {
   width: 150px; 
   padding: 15px;
+}
+
+#game-intro,
+#game-end {
+  position: absolute;
+  background-image: url("/images/intro\ img.png");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#end-game-message {
+  font-family: "MedievalSharp", Arial, sans-serif;
+  font-size: 28px;
+  color: #d4af37;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  padding: 20px;
+}
+
+#game-intro .button-container,
+#game-end .button-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%; 
+  padding: 10px 0;
+  position: absolute;
+  bottom: 20px; 
+}
+
+#game-intro .button-container .medieval-button,
+#game-end .button-container .medieval-button {
+  width: 150px; 
+  padding: 15px;
+  margin: 0 15px;
 }
 
 .background-video {

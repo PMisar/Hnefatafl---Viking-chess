@@ -13,41 +13,8 @@ window.onload = function () {
   const moveDKSound = document.getElementById("moveDK-sound");
   const restartButton = document.getElementById("restart-button");
 
-
   let isBgMuted = false;
   let isMoveMuted = false;
-
-  startButton.addEventListener("click", function () {
-    startGame();
-  });
-
-  function startGame() {
-    startWindow.classList.add("hidden");
-    gameScreen.classList.remove("hidden");
-    backgroundSound.play();
-    initializeGame();
-    renderBoard();
-    updateTurnIndicator();
-  }
-
-  rulesButton.addEventListener("click", () => {
-    rulesModal.classList.remove("hidden");
-  });
-
-  closeRulesButton.addEventListener("click", () => {
-    rulesModal.classList.add("hidden");
-  });
-
-  muteBgButton.addEventListener("click", () => {
-    const isMuted = !backgroundSound.muted;
-
-    backgroundSound.muted = isMuted;
-    moveASound.muted = isMuted;
-    moveDKSound.muted = isMuted;
-
-    muteBgButton.setAttribute("data-label", isMuted ? "Unmute Sound" : "Sound off");
-    muteBgButton.classList.toggle("mute", isMuted);
-  });
 
   const boardSize = 11;
   const board = Array(boardSize).fill(null).map(() => Array(boardSize).fill(null));
@@ -80,7 +47,79 @@ window.onload = function () {
     });
   });
 
+  startButton.addEventListener("click", function () {
+    startGame();
+  });
+
+  backToTheMenuButton.addEventListener("click", function () {
+    endGameWindow.classList.add("hidden");
+    startWindow.classList.remove("hidden");
+  });
+
+  restartButton.addEventListener("click", function () {
+    endGameWindow.classList.add("hidden");
+    startGame();
+  });
+
+  rulesButton.addEventListener("click", () => {
+    rulesModal.classList.remove("hidden");
+  });
+
+  closeRulesButton.addEventListener("click", () => {
+    rulesModal.classList.add("hidden");
+  });
+
+  muteBgButton.addEventListener("click", () => {
+    const isMuted = !backgroundSound.muted;
+
+    backgroundSound.muted = isMuted;
+    moveASound.muted = isMuted;
+    moveDKSound.muted = isMuted;
+
+    muteBgButton.setAttribute("data-label", isMuted ? "Unmute Sound" : "Sound off");
+    muteBgButton.classList.toggle("mute", isMuted);
+  });
+
+  document.getElementById('game-screen').addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.classList.contains('cell')) {
+      const row = parseInt(target.dataset.row);
+      const col = parseInt(target.dataset.col);
+      if (selectedPiece) {
+        movePiece(selectedPiece.row, selectedPiece.col, row, col);
+        selectedPiece = null;
+        clearHighlights();
+      } else {
+        if (board[row][col] && isValidTurn(board[row][col])) {
+          selectedPiece = { row, col };
+          highlightValidMoves(row, col);
+        }
+      }
+    }
+  });
+
+  function startGame() {
+    startWindow.classList.add("hidden");
+    gameScreen.classList.remove("hidden");
+    backgroundSound.play();
+    initializeGame();
+    renderBoard();
+    updateTurnIndicator();
+  }
+
   function initializeGame() {
+    for (let i = 0; i < boardSize; i++) {
+      for (let j = 0; j < boardSize; j++) {
+        board[i][j] = null;
+      }
+    }
+    
+    Object.keys(initialPositions).forEach(type => {
+      initialPositions[type].forEach(([row, col]) => {
+        board[row][col] = pieces[type];
+      });
+    });
+    
     currentPlayer = 'A';
     selectedPiece = null;
     renderBoard();
@@ -103,24 +142,6 @@ window.onload = function () {
       });
     });
   }
-
-  document.getElementById('game-screen').addEventListener('click', (event) => {
-    const target = event.target;
-    if (target.classList.contains('cell')) {
-      const row = parseInt(target.dataset.row);
-      const col = parseInt(target.dataset.col);
-      if (selectedPiece) {
-        movePiece(selectedPiece.row, selectedPiece.col, row, col);
-        selectedPiece = null;
-        clearHighlights();
-      } else {
-        if (board[row][col] && isValidTurn(board[row][col])) {
-          selectedPiece = { row, col };
-          highlightValidMoves(row, col);
-        }
-      }
-    }
-  });
 
   function movePiece(fromRow, fromCol, toRow, toCol) {
     const piece = board[fromRow][fromCol];
@@ -238,14 +259,18 @@ window.onload = function () {
 
   function capturePieces(row, col) {
     const directions = [
-      [-1, 0], // Up
-      [1, 0],  // Down
-      [0, -1], // Left
-      [0, 1]   // Right
+      [-1, 0], 
+      [1, 0], 
+      [0, -1],
+      [0, 1]  
     ];
 
     const currentPlayerPiece = board[row][col];
     const opponentPiece = currentPlayerPiece === pieces.A ? pieces.D : pieces.A;
+
+    const cornerTiles = [
+      [5, 5], [0, 0], [0, 10], [10, 0], [10, 10]
+    ];
 
     directions.forEach(([dRow, dCol]) => {
       const adjRow1 = row + dRow;
@@ -274,6 +299,29 @@ window.onload = function () {
         board[adjRow2]?.[adjCol2] === pieces.A
       ) {
         board[adjRow1][adjCol1] = null;
+      }
+
+      const adjPiece = board[adjRow1]?.[adjCol1];
+      if (adjPiece === pieces.A || adjPiece === pieces.D) {
+        const isNextToCorner = cornerTiles.some(([cornerRow, cornerCol]) =>
+          (Math.abs(cornerRow - adjRow1) + Math.abs(cornerCol - adjCol1)) === 1
+        );
+
+        if (isNextToCorner) {
+          if (
+            currentPlayerPiece === pieces.A &&
+            adjPiece === pieces.D
+          ) {
+            board[adjRow1][adjCol1] = null;
+          }
+
+          if (
+            (currentPlayerPiece === pieces.D || currentPlayerPiece === pieces.K) &&
+            adjPiece === pieces.A
+          ) {
+            board[adjRow1][adjCol1] = null;
+          }
+        }
       }
     });
   }
