@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="images/icon.png" type="image/x-icon" />
+    <link rel="icon" href="images/king.png" type="image/x-icon" />
     <title>Hnefatafl</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
@@ -29,23 +29,62 @@
         <div id="rules-modal" class="hidden">
           <div id="rules-content">
             <h2>Game Rules</h2>
-            <p>
-              Hnefatafl is a Viking strategy board game. The objective depends
-              on your role:
-            </p>
-            <ul>
-              <li>
-                <strong>Attackers (A):</strong> Capture the King (K) by
-                surrounding him on four sides.
-              </li>
-              <li>
-                <strong>Defenders (D):</strong> Help the King escape to one of
-                the corner tiles.
-              </li>
-              <li>
-                <strong>King (K):</strong> Reach one of the corner tiles to win.
-              </li>
-            </ul>
+<p>
+  Hnefatafl is an ancient Viking strategy board game played on an 11 × 11 board.
+  The two sides have different goals:
+</p>
+
+<ul>
+  <li>
+  <strong>Attackers (20 pieces marked as A):</strong>
+  Their mission is to capture the King (K). To win, they must trap the King
+  so that he is surrounded on <em>all four sides</em> by Attackers, or on
+  <em>three sides</em> if the King is standing next to the edge of the board.
+</li>
+  <li>
+    <strong>Defenders (12 pieces marked as D):</strong>
+    Their mission is to protect the King and help him escape. Defenders win if
+    they can move the King onto one of the four <em>corner tiles</em> of the
+    board.
+  </li>
+  <li>
+    <strong>King (K):</strong>
+    The King begins in the center of the board. The King moves like a Defender,
+    but has the special objective of reaching a corner tile to escape and win
+    the game.
+  </li>
+</ul>
+
+<h3>Movement</h3>
+<ul>
+  <li>All pieces (A, D, and K) move like a rook in chess: any number of empty squares vertically or horizontally, but never diagonally.</li>
+  <li>Pieces cannot jump over other pieces. They must stop before reaching an occupied square.</li>
+  <li>The <strong>corner tiles</strong> are special: only the King can move onto them. Attackers and Defenders cannot land there.</li>
+  <li>The <strong>center tile</strong> (where the King begins) is also special. After the King leaves it, only the King may re-enter that square.</li>
+</ul>
+
+<h3>Capturing</h3>
+<ul>
+  <li>A piece is captured when it is trapped between two enemy pieces, one on each side, along a row or column.</li>
+  <li>The captured piece is removed immediately from the board.</li>
+  <li>Multiple captures can happen in a single move if more than one enemy piece becomes surrounded.</li>
+  <li>The King is captured only when surrounded on all <em>four sides</em> (not just two, like normal pieces).</li>
+</ul>
+
+<h3>Special Rules</h3>
+<ul>
+  <li>Only the King may move onto the corner tiles or the central square.</li>
+  <li>Defenders cannot win unless the King reaches a corner square — simply surviving is not enough.</li>
+  <li>Attackers must coordinate to trap the King and prevent him from reaching the corners.</li>
+  <li>Defenders must work together to break through the attacker lines and open a path for the King to escape.</li>
+</ul>
+
+<h3>How to Win</h3>
+<ul>
+  <li><strong>Attackers win</strong> if the King is completely surrounded on all four sides.</li>
+  <li><strong>Defenders win</strong> if the King reaches any one of the four corner tiles.</li>
+</ul>
+
             <button id="close-rules-button" class="medieval-button">
               Close
             </button>
